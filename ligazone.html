@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏴‍☠️ LIGAZONE - The Legendary Pirate Championship 🏴‍☠️</title>
+    
+    <!-- Enhanced Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Pirata+One&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Rye&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --deep-ocean: #0a1628;
+            --dark-water: #1a2f4a;
+            --stormy-sea: #2c4c6d;
+            --golden-treasure: #ffd700;
+            --pirate-gold: #d4af37;
+            --blood-red: #8b0000;
+            --cannon-smoke: #2f2f2f;
+            --pearl-white: #f8f9fa;
+            --rum-brown: #8b4513;
+            --emerald-jewel: #50c878;
+            --sapphire-blue: #0f52ba;
+            --skull-white: #f5f5dc;
+            --treasure-glow: rgba(255, 215, 0, 0.8);
+            --ocean-foam: #87ceeb;
+            --ship-wood: #8b4513;
+            --cannon-metal: #36454f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-ocean);
+            color: var(--skull-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">⚓</text></svg>'), auto;
+        }
+
+        /* EPIC ANIMATED OCEAN BACKGROUND */
+        .legendary-ocean {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.4) 0%, transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(80, 200, 120, 0.2) 0%, transparent 60%),
+                linear-gradient(45deg, var(--deep-ocean) 0%, var(--dark-water) 30%, var(--stormy-sea) 70%, var(--deep-ocean) 100%);
+            animation: ocean-storm 20s ease-in-out infinite;
+        }
+
+        @keyframes ocean-storm {
+            0%, 100% { filter: hue-rotate(0deg) brightness(0.8); }
+            25% { filter: hue-rotate(10deg) brightness(0.9); }
+            50% { filter: hue-rotate(-10deg) brightness(1.1); }
+            75% { filter: hue-rotate(5deg) brightness(0.85); }
+        }
+
+        /* EPIC MULTI-LAYER WAVES */
+        .wave-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 120px;
+            opacity: 0.7;
+        }
+
+        .wave-layer:nth-child(1) {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23ffd700' fill-opacity='0.3'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave-roll 25s linear infinite;
+            z-index: 3;
+        }
+
+        .wave-layer:nth-child(2) {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='%2387ceeb' fill-opacity='0.4'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave-roll 20s linear infinite reverse;
+            z-index: 2;
+        }
+
+        .wave-layer:nth-child(3) {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%232c4c6d' fill-opacity='0.6'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave-roll 15s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes wave-roll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* FLOATING TREASURE & PIRATE ELEMENTS */
+        .floating-treasure {
+            position: fixed;
+            pointer-events: none;
+            z-index: -5;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: treasure-float 12s ease-in-out infinite;
+        }
+
+        @keyframes treasure-float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                filter: drop-shadow(0 0 20px var(--treasure-glow));
+            }
+            25% { 
+                transform: translateY(-30px) rotate(90deg) scale(1.1);
+                filter: drop-shadow(0 0 30px var(--treasure-glow));
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg) scale(0.9);
+                filter: drop-shadow(0 0 25px var(--treasure-glow));
+            }
+            75% { 
+                transform: translateY(-40px) rotate(270deg) scale(1.05);
+                filter: drop-shadow(0 0 35px var(--treasure-glow));
+            }
+        }
+
+        .skull-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -4;
+            color: var(--skull-white);
+            opacity: 0.3;
+            animation: skull-drift 20s linear infinite;
+        }
+
+        @keyframes skull-drift {
+            0% {
+                transform: translateX(-100px) translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% {
+                transform: translateX(100vw) translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* LIGHTNING EFFECTS */
+        .lightning-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: -8;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .lightning-active {
+            animation: lightning-strike 0.2s ease-in-out;
+        }
+
+        @keyframes lightning-strike {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* EPIC LOADING SCREEN */
+        .pirate-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--deep-ocean), var(--dark-water), var(--blood-red));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: all 1s ease;
+        }
+
+        .treasure-chest-loading {
+            position: relative;
+            font-size: 6rem;
+            color: var(--golden-treasure);
+            animation: chest-bounce 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes chest-bounce {
+            0%, 100% { 
+                transform: scale(1) rotateY(0deg);
+                filter: drop-shadow(0 0 30px var(--treasure-glow));
+            }
+            25% { 
+                transform: scale(1.1) rotateY(90deg);
+                filter: drop-shadow(0 0 50px var(--treasure-glow));
+            }
+            50% { 
+                transform: scale(1.2) rotateY(180deg);
+                filter: drop-shadow(0 0 40px var(--treasure-glow));
+            }
+            75% { 
+                transform: scale(1.1) rotateY(270deg);
+                filter: drop-shadow(0 0 60px var(--treasure-glow));
+            }
+        }
+
+        .loading-text {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: var(--golden-treasure);
+            text-shadow: 0 0 20px var(--treasure-glow);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { 
+                text-shadow: 0 0 20px var(--treasure-glow), 0 0 40px var(--treasure-glow);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 30px var(--treasure-glow), 0 0 60px var(--treasure-glow), 0 0 80px var(--treasure-glow);
+                transform: scale(1.05);
+            }
+        }
+
+        /* LEGENDARY NAVIGATION */
+        .pirate-navbar {
+            background: linear-gradient(90deg, 
+                rgba(139, 69, 19, 0.95) 0%, 
+                rgba(26, 47, 74, 0.95) 50%, 
+                rgba(139, 69, 19, 0.95) 100%) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 3px solid var(--golden-treasure);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            padding: 1rem 0;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pirate-navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            animation: navbar-shimmer 8s linear infinite;
+        }
+
+        @keyframes navbar-shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .legendary-brand {
+            font-family: 'Pirata One', cursive;
+            font-weight: 700;
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--golden-treasure), var(--skull-white), var(--pirate-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-shadow: 0 0 30px var(--treasure-glow);
+            animation: brand-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes brand-glow {
+            0%, 100% { filter: drop-shadow(0 0 10px var(--treasure-glow)); }
+            50% { filter: drop-shadow(0 0 20px var(--treasure-glow)) drop-shadow(0 0 30px var(--golden-treasure)); }
+        }
+
+        .legendary-brand img {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 0 15px var(--treasure-glow));
+            animation: logo-spin 10s linear infinite;
+        }
+
+        @keyframes logo-spin {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .pirate-nav-link {
+            color: var(--skull-white) !important;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pirate-nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--golden-treasure), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .pirate-nav-link:hover::before {
+            left: 100%;
+        }
+
+        .pirate-nav-link:hover {
+            color: var(--deep-ocean) !important;
+            background: var(--golden-treasure);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        /* EPIC HERO SECTION */
+        .legendary-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 0;
+        }
+
+        .hero-storm-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(139, 0, 0, 0.15) 0%, transparent 40%);
+            animation: storm-swirl 15s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes storm-swirl {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.05); }
+        }
+
+        .epic-title {
+            font-family: 'Pirata One', cursive;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, 
+                var(--golden-treasure) 0%, 
+                var(--skull-white) 25%, 
+                var(--pirate-gold) 50%, 
+                var(--golden-treasure) 75%, 
+                var(--skull-white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: epic-shimmer 4s ease-in-out infinite, title-float 6s ease-in-out infinite;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes epic-shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes title-float {
+            0%, 100% { 
+                transform: translateY(0px) rotateX(0deg);
+                text-shadow: 0 0 30px var(--treasure-glow);
+            }
+            50% { 
+                transform: translateY(-10px) rotateX(5deg);
+                text-shadow: 0 0 50px var(--treasure-glow), 0 0 80px var(--golden-treasure);
+            }
+        }
+
+        .epic-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--ocean-foam);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            text-shadow: 0 0 20px rgba(135, 206, 235, 0.6);
+            animation: subtitle-glow 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes subtitle-glow {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(135, 206, 235, 0.6);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 30px rgba(135, 206, 235, 0.8), 0 0 50px rgba(135, 206, 235, 0.4);
+                transform: scale(1.02);
+            }
+        }
+
+        /* LEGENDARY PIRATE SHIP */
+        .legendary-ship {
+            position: absolute;
+            right: 5%;
+            top: 15%;
+            font-size: clamp(6rem, 15vw, 12rem);
+            color: var(--ship-wood);
+            animation: ship-sailing 12s ease-in-out infinite;
+            z-index: 1;
+            filter: drop-shadow(0 0 30px rgba(139, 69, 19, 0.6));
+        }
+
+        @keyframes ship-sailing {
+            0%, 100% { 
+                transform: rotate(-8deg) translateY(0px) translateX(0px);
+                filter: drop-shadow(0 0 30px rgba(139, 69, 19, 0.6));
+            }
+            25% { 
+                transform: rotate(-3deg) translateY(-20px) translateX(10px);
+                filter: drop-shadow(0 0 40px rgba(139, 69, 19, 0.8));
+            }
+            50% { 
+                transform: rotate(0deg) translateY(-10px) translateX(20px);
+                filter: drop-shadow(0 0 50px rgba(139, 69, 19, 1));
+            }
+            75% { 
+                transform: rotate(3deg) translateY(-25px) translateX(10px);
+                filter: drop-shadow(0 0 45px rgba(139, 69, 19, 0.9));
+            }
+        }
+
+        /* EPIC PIRATE BUTTONS */
+        .legendary-btn {
+            background: linear-gradient(45deg, var(--golden-treasure) 0%, var(--pirate-gold) 50%, var(--golden-treasure) 100%);
+            border: 3px solid var(--ship-wood);
+            color: var(--deep-ocean);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0.5rem;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🏴‍☠️</text></svg>'), pointer;
+        }
+
+        .legendary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .legendary-btn:hover::before {
+            left: 100%;
+        }
+
+        .legendary-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            color: var(--deep-ocean);
+            border-color: var(--golden-treasure);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            border: 3px solid var(--golden-treasure);
+            color: var(--golden-treasure);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0.5rem;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">⚔️</text></svg>'), pointer;
+        }
+
+        .secondary-btn:hover {
+            background: var(--golden-treasure);
+            color: var(--deep-ocean);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+        }
+
+        /* LEGENDARY COMPETITION SECTION */
+        .competition-seas {
+            padding: 6rem 0;
+            position: relative;
+            background: linear-gradient(180deg, transparent 0%, rgba(139, 0, 0, 0.1) 50%, transparent 100%);
+        }
+
+        .treasure-map-title {
+            font-family: 'Pirata One', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, var(--golden-treasure), var(--skull-white), var(--pirate-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            animation: treasure-glow 3s ease-in-out infinite;
+        }
+
+        .treasure-map-title::before {
+            content: '🗺️';
+            position: absolute;
+            left: -4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: map-spin 8s linear infinite;
+        }
+
+        .treasure-map-title::after {
+            content: '🗺️';
+            position: absolute;
+            right: -4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: map-spin 8s linear infinite reverse;
+        }
+
+        @keyframes map-spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* EPIC COMPETITION CARDS */
+        .legendary-card {
+            background: linear-gradient(145deg, 
+                rgba(139, 69, 19, 0.2) 0%, 
+                rgba(26, 47, 74, 0.3) 50%, 
+                rgba(54, 69, 79, 0.2) 100%);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--golden-treasure);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin: 1.5rem 0;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">💎</text></svg>'), pointer;
+        }
+
+        .legendary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 215, 0, 0.1) 50%, 
+                transparent 70%);
+            transform: translateX(-100%) rotate(45deg);
+            transition: transform 0.8s ease;
+        }
+
+        .legendary-card:hover::before {
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        .legendary-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--golden-treasure), var(--pirate-gold), var(--emerald-jewel), var(--sapphire-blue));
+            border-radius: 25px;
+            z-index: -1;
+            animation: border-glow 4s linear infinite;
+        }
+
+        @keyframes border-glow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .legendary-card:hover {
+            transform: translateY(-15px) scale(1.02) rotateX(5deg);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 50px rgba(255, 215, 0, 0.3);
+            border-color: var(--skull-white);
+        }
+
+        .card-treasure-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            text-align: center;
+            animation: treasure-bounce 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px var(--treasure-glow));
+        }
+
+        @keyframes treasure-bounce {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                filter: drop-shadow(0 0 20px var(--treasure-glow));
+            }
+            50% { 
+                transform: translateY(-10px) rotate(10deg) scale(1.1);
+                filter: drop-shadow(0 0 30px var(--treasure-glow));
+            }
+        }
+
+        .card-legendary-title {
+            font-family: 'Pirata One', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--golden-treasure);
+            text-align: center;
+            text-shadow: 0 0 20px var(--treasure-glow);
+            animation: title-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes title-pulse {
+            0%, 100% { text-shadow: 0 0 20px var(--treasure-glow); }
+            50% { text-shadow: 0 0 30px var(--treasure-glow), 0 0 40px var(--golden-treasure); }
+        }
+
+        .card-crew-info {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--pirate-gold);
+            text-align: center;
+        }
+
+        .crew-captain {
+            color: var(--ocean-foam);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .crew-contact {
+            color: var(--skull-white);
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .card-action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, var(--blood-red), var(--rum-brown));
+            border: 2px solid var(--golden-treasure);
+            color: var(--skull-white);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(45deg, var(--golden-treasure), var(--pirate-gold));
+            color: var(--deep-ocean);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .juknis-btn {
+            background: linear-gradient(45deg, var(--emerald-jewel), var(--sapphire-blue));
+        }
+
+        .juknis-btn:hover {
+            background: linear-gradient(45deg, var(--skull-white), var(--ocean-foam));
+        }
+
+        /* CONTACT SECTION - PIRATE CREW */
+        .pirate-crew-section {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, 
+                rgba(139, 0, 0, 0.1) 0%, 
+                rgba(26, 47, 74, 0.2) 50%, 
+                rgba(139, 0, 0, 0.1) 100%);
+            position: relative;
+        }
+
+        .crew-title {
+            font-family: 'Pirata One', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, var(--golden-treasure), var(--skull-white), var(--blood-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .crew-title::before {
+            content: '☠️';
+            position: absolute;
+            left: -4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: skull-rock 4s ease-in-out infinite;
+        }
+
+        .crew-title::after {
+            content: '☠️';
+            position: absolute;
+            right: -4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: skull-rock 4s ease-in-out infinite reverse;
+        }
+
+        @keyframes skull-rock {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-50%) rotate(15deg); }
+        }
+
+        .crew-member-card {
+            background: linear-gradient(145deg, 
+                rgba(139, 69, 19, 0.4) 0%, 
+                rgba(26, 47, 74, 0.5) 50%, 
+                rgba(139, 0, 0, 0.3) 100%);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--pirate-gold);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            transition: all 0.5s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crew-member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .crew-member-card:hover::before {
+            opacity: 1;
+        }
+
+        .crew-member-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2);
+            border-color: var(--golden-treasure);
+        }
+
+        .crew-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--golden-treasure);
+            animation: icon-spin 6s linear infinite;
+            filter: drop-shadow(0 0 15px var(--treasure-glow));
+        }
+
+        @keyframes icon-spin {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .crew-name {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--golden-treasure);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px var(--treasure-glow);
+        }
+
+        .crew-role {
+            color: var(--ocean-foam);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .crew-contact {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 25px;
+            padding: 0.8rem 1.5rem;
+            color: var(--skull-white);
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            border: 1px solid var(--pirate-gold);
+            display: inline-block;
+        }
+
+        /* EPIC FOOTER */
+        .legendary-footer {
+            background: linear-gradient(45deg, 
+                var(--deep-ocean) 0%, 
+                var(--dark-water) 30%, 
+                var(--cannon-smoke) 70%, 
+                var(--deep-ocean) 100%);
+            padding: 4rem 0 2rem;
+            border-top: 3px solid var(--golden-treasure);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legendary-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='50' font-size='30' opacity='0.1'%3E⚓🏴‍☠️⚔️💀⚓🏴‍☠️⚔️💀%3C/text%3E%3C/svg%3E") repeat;
+            animation: footer-pattern 20s linear infinite;
+        }
+
+        @keyframes footer-pattern {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        .footer-logo {
+            font-family: 'Pirata One', cursive;
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--golden-treasure), var(--skull-white));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: logo-glow 3s ease-in-out infinite;
+        }
+
+        .social-treasures {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .social-treasures a {
+            color: var(--ocean-foam);
+            font-size: 2rem;
+            margin: 0 1.5rem;
+            transition: all 0.4s ease;
+            display: inline-block;
+        }
+
+        .social-treasures a:hover {
+            color: var(--golden-treasure);
+            transform: translateY(-5px) scale(1.2) rotate(15deg);
+            filter: drop-shadow(0 0 20px var(--treasure-glow));
+        }
+
+        /* SCROLL TO TOP - TREASURE COMPASS */
+        .treasure-compass {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(45deg, var(--golden-treasure), var(--pirate-gold));
+            color: var(--deep-ocean);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            border: 3px solid var(--ship-wood);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .treasure-compass.visible {
+            opacity: 1;
+            visibility: visible;
+            animation: compass-spin 4s linear infinite;
+        }
+
+        @keyframes compass-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .treasure-compass:hover {
+            transform: scale(1.2);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .epic-title {
+                font-size: 4rem;
+            }
+            
+            .legendary-ship {
+                right: 2%;
+                font-size: 6rem;
+            }
+            
+            .card-action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .treasure-map-title::before,
+            .treasure-map-title::after,
+            .crew-title::before,
+            .crew-title::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .legendary-card,
+            .crew-member-card {
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
+
+            .legendary-btn,
+            .secondary-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* CUSTOM CURSOR TRAILS */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--golden-treasure);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.7;
+            animation: trail-fade 1s ease-out forwards;
+        }
+
+        @keyframes trail-fade {
+            0% { 
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            100% { 
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* SOUND WAVE EFFECTS */
+        .sound-wave {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .wave-bar {
+            width: 6px;
+            height: 30px;
+            background: var(--golden-treasure);
+            margin: 2px;
+            display: inline-block;
+            animation: wave-dance 1.5s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { animation-delay: 0s; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes wave-dance {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- EPIC LOADING SCREEN -->
+    <div class="pirate-loading" id="pirateLoading">
+        <div class="treasure-chest-loading">
+            <i class="fas fa-treasure-chest"></i>
+        </div>
+        <div class="loading-text">Ahoy! Sedang loading </div>
+        <div style="margin-top: 2rem; font-size: 3rem;">
+            ⚓ 🏴‍☠️ ⚔️ 💎 ☠️
+        </div>
+    </div>
+
+    <!-- LEGENDARY OCEAN BACKGROUND -->
+    <div class="legendary-ocean">
+        <div class="wave-layer"></div>
+        <div class="wave-layer"></div>
+        <div class="wave-layer"></div>
+        <div class="lightning-flash" id="lightningFlash"></div>
+    </div>
+
+    <!-- SOUND WAVE CONTROLLER -->
+    <div class="sound-wave" id="soundController">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+    </div>
+
+    <!-- LEGENDARY NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pirate-navbar">
+        <div class="container">
+            <a class="navbar-brand legendary-brand" href="#home">
+                <img src="aset/logo.png" alt="Ligazone Legendary Logo">
+                LIGAZONE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pirateNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="pirateNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link pirate-nav-link" href="#home">🏠 Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pirate-nav-link" href="#competitions">⚔️ Lomba</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pirate-nav-link" href="#contact">👥 Crew</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pirate-nav-link legendary-btn ms-2" href="#drive-perizinan">📜 Drive Perizinan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- EPIC HERO SECTION -->
+    <section id="home" class="legendary-hero">
+        <div class="hero-storm-effect"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center" data-aos="fade-up" data-aos-duration="1500">
+                        <h1 class="epic-title">🏴‍☠️ LIGAZONE 🏴‍☠️</h1>
+                        <p class="epic-subtitle">⚓ Berlayar Menuju Kemenangan Legendaris ⚓</p>
+                        <div class="mt-5">
+                            <a href="#competitions" class="legendary-btn">
+                                <i class="fas fa-anchor me-2"></i>Jelajahi Lautan Kompetisi
+                            </a>
+                            <a href="#drive-perizinan" class="secondary-btn">
+                                <i class="fas fa-scroll me-2"></i>Peta Harta Karun
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="legendary-ship" data-aos="fade-left" data-aos-delay="800">
+            <i class="fas fa-ship"></i>
+        </div>
+    </section>
+
+    <!-- LEGENDARY COMPETITIONS SECTION -->
+    <section id="competitions" class="competition-seas">
+        <div class="container">
+            <h2 class="treasure-map-title" data-aos="fade-up">Peta Kompetisi Legendaris</h2>
+            <div class="row">
+                <!-- Band Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="100">
+                    <div class="legendary-card">
+                        <div class="card-treasure-icon">🎵</div>
+                        <h3 class="card-legendary-title">Seleksi Band</h3>
+                        <div class="card-crew-info">
+                            <div class="crew-captain">🎤 Kordinator: Moses</div>
+                            <div class="crew-contact">📞 +62 877-4306-3367</div>
+                        </div>
+                        <div class="card-action-buttons">
+                            <a href="#daftar" class="action-btn">
+                                <i class="fas fa-user-plus me-2"></i>Bergabung
+                            </a>
+                            <a href="#juknis" class="action-btn juknis-btn">
+                                <i class="fas fa-map me-2"></i> Lihat Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solo Vocal Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
+                    <div class="legendary-card">
+                        <div class="card-treasure-icon">🎤</div>
+                        <h3 class="card-legendary-title">Solo Vokal </h3>
+                        <div class="card-crew-info">
+                            <div class="crew-captain">🎶 Kordinator: Raffa</div>
+                            <div class="crew-contact">📞 +62 813-8871-3581</div>
+                        </div>
+                        <div class="card-action-buttons">
+                            <a href="#daftar" class="action-btn">
+                                <i class="fas fa-user-plus me-2"></i>Bergabung
+                            </a>
+                            <a href="#juknis" class="action-btn juknis-btn">
+                                <i class="fas fa-map me-2"></i>Lihat Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traditional Dance Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="300">
+                    <div class="legendary-card">
+                        <div class="card-treasure-icon">💃</div>
+                        <h3 class="card-legendary-title">Tari Tradisional</h3>
+                        <div class="card-crew-info">
+                            <div class="crew-captain">✨ Kordinator: Felicia</div>
+                            <div class="crew-contact">📞 +62 877-1670-5972</div>
+                        </div>
+                        <div class="card-action-buttons">
+                            <a href="#daftar" class="action-btn">
+                                <i class="fas fa-user-plus me-2"></i>Bergabung
+                            </a>
+                            <a href="#juknis" class="action-btn juknis-btn">
+                                <i class="fas fa-map me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basketball Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="flip-right" data-aos-delay="400">
+                    <div class="legendary-card">
+                        <div class="card-treasure-icon">🏀</div>
+                        <h3 class="card-legendary-title">Basket</h3>
+                        <div class="card-crew-info">
+                            <div class="crew-captain">⛹️ Kordinator: Jesslyne</div>
+                            <div class="crew-contact">📞 +62 813-9956-3828</div>
+                        </div>
+                        <div class="card-action-buttons">
+                            <a href="#daftar" class="action-btn">
+                                <i class="fas fa-user-plus me-2"></i>Bergabung
+                            </a>
+                            <a href="#juknis" class="action-btn juknis-btn">
+                                <i class="fas fa-map me-2"></i>Lihat Juknis 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Futsal Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="flip-right" data-aos-delay="500">
+                    <div class="legendary-card">
+                        <div class="card-treasure-icon">⚽</div>
+                        <h3 class="card-legendary-title">Futsal </h3>
+                        <div class="card-crew-info">
+                            <div class="crew-captain">🥅 Kordinator: Awan</div>
+                            <div class="crew-contact">📞 +62 813-9991-0110</div>
+                        </div>
+                        <div class="card-action-buttons">
+                            <a href="#daftar" class="action-btn">
+                                <i class="fas fa-user-plus me-2"></i>Bergabung
+                            </a>
+                            <a href="#juknis" class="action-btn juknis-btn">
+                                <i class="fas fa-map me-2"></i>Lihat Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-Sport Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="flip-right" data-aos-delay="600">
+                    <div class="legendary-card">
+                        <div class="card-treasure-icon">🎮</div>
+                        <h3 class="card-legendary-title">E-Sport Digital</h3>
+                        <div class="card-crew-info">
+                            <div class="crew-captain">🕹️ Kordinator: Ichsan</div>
+                            <div class="crew-contact">📞 +62 856-9753-9273</div>
+                        </div>
+                        <div class="card-action-buttons">
+                            <a href="#daftar" class="action-btn">
+                                <i class="fas fa-user-plus me-2"></i>Bergabung
+                            </a>
+                            <a href="#juknis" class="action-btn juknis-btn">
+                                <i class="fas fa-map me-2"></i>Lihat Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIRATE CREW CONTACT SECTION -->
+    <section id="contact" class="pirate-crew-section">
+        <div class="container">
+            <h2 class="crew-title" data-aos="zoom-in">Legendary Pirate Crew</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="crew-member-card">
+                        <div class="crew-icon">🎵</div>
+                        <div class="crew-name">Moses</div>
+                        <div class="crew-role">🎤 Admiral of Melodies</div>
+                        <div class="crew-contact">+62 877-4306-3367</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="crew-member-card">
+                        <div class="crew-icon">🎤</div>
+                        <div class="crew-name">Raffa</div>
+                        <div class="crew-role">🎶 Captain of Vocals</div>
+                        <div class="crew-contact">+62 813-8871-3581</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="crew-member-card">
+                        <div class="crew-icon">💃</div>
+                        <div class="crew-name">Felicia</div>
+                        <div class="crew-role">✨ Mystical Dance Master</div>
+                        <div class="crew-contact">+62 877-1670-5972</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="crew-member-card">
+                        <div class="crew-icon">🏀</div>
+                        <div class="crew-name">Jesslyne</div>
+                        <div class="crew-role">⛹️ Basketball Buccaneer</div>
+                        <div class="crew-contact">+62 813-9956-3828</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="crew-member-card">
+                        <div class="crew-icon">⚽</div>
+                        <div class="crew-name">Awan</div>
+                        <div class="crew-role">🥅 Futsal Sea Wolf</div>
+                        <div class="crew-contact">+62 813-9991-0110</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="crew-member-card">
+                        <div class="crew-icon">🎮</div>
+                        <div class="crew-name">Ichsan</div>
+                        <div class="crew-role">🕹️ Digital Corsair</div>
+                        <div class="crew-contact">+62 856-9753-9273</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEGENDARY FOOTER -->
+    <footer class="legendary-footer">
+        <div class="container">
+            <div class="text-center">
+                <div class="footer-logo" data-aos="fade-up">🏴‍☠️ LIGAZONE 🏴‍☠️</div>
+                <p data-aos="fade-up" data-aos-delay="100" style="font-size: 1.2rem; color: var(--ocean-foam);">
+                    ⚓ Berlayar Menuju Kemenangan Legendaris ⚓
+                </p>
+                <div class="social-treasures" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+                <p data-aos="fade-up" data-aos-delay="300" style="color: var(--pirate-gold);">
+                    🗓️ &copy; 2024 Ligazone Legendary Championship. Semua harta karun dilindungi undang-undang bajak laut. 🗓️
+                </p>
+                <div data-aos="fade-up" data-aos-delay="400" style="margin-top: 2rem; font-size: 2rem;">
+                    ⚓ 🏴‍☠️ ⚔️ 💎 ☠️ 🏴‍☠️ ⚓
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TREASURE COMPASS SCROLL TO TOP -->
+    <a href="#home" class="treasure-compass" id="treasureCompass">
+        <i class="fas fa-compass"></i>
+    </a>
+
+    <!-- Advanced JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS with Epic Settings
+        AOS.init({
+            duration: 1500,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // EPIC LOADING SCREEN WITH TREASURE ANIMATION
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('pirateLoading');
+            
+            // Extended loading for epic effect
+            setTimeout(() => {
+                loadingScreen.style.transform = 'scale(0.8)';
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    // Start the legendary experience
+                    startLegendaryEffects();
+                }, 800);
+            }, 3000); // 3 seconds of epic loading
+        });
+
+        // LEGENDARY EFFECTS SYSTEM
+        function startLegendaryEffects() {
+            createFloatingTreasures();
+            createSkullParticles();
+            startLightningEffect();
+            initCursorTrail();
+            startOceanSounds();
+        }
+
+        // FLOATING TREASURES SYSTEM
+        function createFloatingTreasures() {
+            const treasureIcons = ['💎', '🏆', '👑', '💰', '🗝️', '⚱️', '🔱', '⚜️'];
+            
+            setInterval(() => {
+                if (document.querySelectorAll('.floating-treasure').length < 15) {
+                    const treasure = document.createElement('div');
+                    treasure.className = 'floating-treasure';
+                    treasure.innerHTML = treasureIcons[Math.floor(Math.random() * treasureIcons.length)];
+                    treasure.style.left = Math.random() * 100 + 'vw';
+                    treasure.style.top = Math.random() * 100 + 'vh';
+                    treasure.style.animationDelay = Math.random() * 8 + 's';
+                    treasure.style.animationDuration = (Math.random() * 8 + 8) + 's';
+                    document.body.appendChild(treasure);
+
+                    // Remove after animation
+                    setTimeout(() => {
+                        if (treasure.parentNode) {
+                            treasure.parentNode.removeChild(treasure);
+                        }
+                    }, 20000);
+                }
+            }, 2000);
+        }
+
+        // SKULL PARTICLES SYSTEM
+        function createSkullParticles() {
+            const skullIcons = ['☠️', '💀', '👻', '🦴'];
+            
+            setInterval(() => {
+                if (document.querySelectorAll('.skull-particle').length < 8) {
+                    const skull = document.createElement('div');
+                    skull.className = 'skull-particle';
+                    skull.innerHTML = skullIcons[Math.floor(Math.random() * skullIcons.length)];
+                    skull.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                    skull.style.left = '-100px';
+                    skull.style.top = Math.random() * 100 + 'vh';
+                    skull.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                    document.body.appendChild(skull);
+
+                    // Remove after animation
+                    setTimeout(() => {
+                        if (skull.parentNode) {
+                            skull.parentNode.removeChild(skull);
+                        }
+                    }, 35000);
+                }
+            }, 5000);
+        }
+
+        // LIGHTNING EFFECT SYSTEM
+        function startLightningEffect() {
+            const lightning = document.getElementById('lightningFlash');
+            
+            setInterval(() => {
+                if (Math.random() < 0.1) { // 10% chance every interval
+                    lightning.classList.add('lightning-active');
+                    setTimeout(() => {
+                        lightning.classList.remove('lightning-active');
+                    }, 200);
+                }
+            }, 3000);
+        }
+
+        // CURSOR TRAIL SYSTEM
+        function initCursorTrail() {
+            let mouseX = 0, mouseY = 0;
+            
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // Create trail effect
+                if (Math.random() < 0.3) {
+                    const trail = document.createElement('div');
+                    trail.className = 'cursor-trail';
+                    trail.style.left = mouseX + 'px';
+                    trail.style.top = mouseY + 'px';
+                    document.body.appendChild(trail);
+                    
+                    setTimeout(() => {
+                        if (trail.parentNode) {
+                            trail.parentNode.removeChild(trail);
+                        }
+                    }, 1000);
+                }
+            });
+        }
+
+        // OCEAN SOUNDS SYSTEM
+        let oceanSoundsEnabled = false;
+        const soundController = document.getElementById('soundController');
+        let audioContext, oscillator, gainNode;
+
+        function startOceanSounds() {
+            soundController.addEventListener('click', function() {
+                if (!oceanSoundsEnabled) {
+                    enableOceanSounds();
+                    soundController.style.color = 'var(--golden-treasure)';
+                    soundController.style.filter = 'drop-shadow(0 0 20px var(--treasure-glow))';
+                } else {
+                    disableOceanSounds();
+                    soundController.style.color = 'var(--skull-white)';
+                    soundController.style.filter = 'none';
+                }
+                oceanSoundsEnabled = !oceanSoundsEnabled;
+            });
+        }
+
+        function enableOceanSounds() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Create ocean wave sound effect
+                oscillator = audioContext.createOscillator();
+                gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 100;
+                oscillator.type = 'sine';
+                gainNode.gain.value = 0.1;
+                
+                oscillator.start();
+                
+                // Modulate for wave effect
+                setInterval(() => {
+                    if (oscillator && gainNode) {
+                        oscillator.frequency.value = 80 + Math.random() * 40;
+                        gainNode.gain.value = 0.05 + Math.random() * 0.1;
+                    }
+                }, 2000);
+            } catch (e) {
+                console.log('Audio not supported');
+            }
+        }
+
+        function disableOceanSounds() {
+            if (oscillator) {
+                oscillator.stop();
+                oscillator = null;
+            }
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+        }
+
+        // EPIC NAVBAR EFFECTS
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.pirate-navbar');
+            const compass = document.getElementById('treasureCompass');
+            
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(90deg, rgba(139, 69, 19, 0.98) 0%, rgba(26, 47, 74, 0.98) 50%, rgba(139, 69, 19, 0.98) 100%)';
+                navbar.style.boxShadow = '0 8px 40px rgba(0, 0, 0, 0.6)';
+            } else {
+                navbar.style.background = 'linear-gradient(90deg, rgba(139, 69, 19, 0.95) 0%, rgba(26, 47, 74, 0.95) 50%, rgba(139, 69, 19, 0.95) 100%)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
+            }
+
+            // Show/hide compass
+            if (window.scrollY > 500) {
+                compass.classList.add('visible');
+            } else {
+                compass.classList.remove('visible');
+            }
+        });
+
+        // SMOOTH SCROLLING WITH PIRATE FLAIR
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Add treasure burst effect
+                    createTreasureBurst(target);
+                }
+            });
+        });
+
+        function createTreasureBurst(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 8; i++) {
+                const treasure = document.createElement('div');
+                treasure.innerHTML = '💎';
+                treasure.style.position = 'fixed';
+                treasure.style.left = centerX + 'px';
+                treasure.style.top = centerY + 'px';
+                treasure.style.fontSize = '2rem';
+                treasure.style.pointerEvents = 'none';
+                treasure.style.zIndex = '9999';
+                treasure.style.color = 'var(--golden-treasure)';
+                
+                const angle = (i / 8) * Math.PI * 2;
+                const distance = 100;
+                const endX = centerX + Math.cos(angle) * distance;
+                const endY = centerY + Math.sin(angle) * distance;
+                
+                treasure.animate([
+                    { 
+                        transform: 'translate(0, 0) scale(1) rotate(0deg)',
+                        opacity: 1
+                    },
+                    { 
+                        transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(0) rotate(360deg)`,
+                        opacity: 0
+                    }
+                ], {
+                    duration: 1000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+                
+                document.body.appendChild(treasure);
+                
+                setTimeout(() => {
+                    if (treasure.parentNode) {
+                        treasure.parentNode.removeChild(treasure);
+                    }
+                }, 1000);
+            }
+        }
+
+        // LEGENDARY CARD INTERACTIONS
+        document.querySelectorAll('.legendary-card, .crew-member-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // Add treasure sparkle effect
+                const sparkles = document.createElement('div');
+                sparkles.innerHTML = '✨💎✨';
+                sparkles.style.position = 'absolute';
+                sparkles.style.top = '10px';
+                sparkles.style.right = '10px';
+                sparkles.style.fontSize = '1.5rem';
+                sparkles.style.animation = 'treasure-bounce 1s ease-in-out infinite';
+                sparkles.style.pointerEvents = 'none';
+                sparkles.className = 'card-sparkles';
+                this.appendChild(sparkles);
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const sparkles = this.querySelector('.card-sparkles');
+                if (sparkles) {
+                    sparkles.remove();
+                }
+            });
+        });
+
+        // BUTTON RIPPLE EFFECTS
+        document.querySelectorAll('.legendary-btn, .secondary-btn, .action-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple-effect');
+                
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 215, 0, 0.6)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation to CSS
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // PARALLAX EFFECTS FOR SHIP
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const ship = document.querySelector('.legendary-ship');
+            if (ship) {
+                const speed = scrolled * 0.3;
+                ship.style.transform = `translateY(${speed}px) translateX(${speed * 0.1}px) rotate(${scrolled * 0.05}deg)`;
+            }
+        });
+
+        // KEYBOARD SHORTCUTS FOR PIRATE NAVIGATION
+        document.addEventListener('keydown', function(e) {
+            // Press 'P' for Pirate Mode (secret feature)
+            if (e.key.toLowerCase() === 'p') {
+                document.body.style.filter = 'sepia(20%) saturate(120%) hue-rotate(10deg)';
+                setTimeout(() => {
+                    document.body.style.filter = '';
+                }, 2000);
+            }
+            
+            // Press 'T' for Treasure Hunt Mode
+            if (e.key.toLowerCase() === 't') {
+                createTreasureRain();
+            }
+        });
+
+        function createTreasureRain() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const treasure = document.createElement('div');
+                    treasure.innerHTML = ['💎', '🏆', '👑', '💰'][Math.floor(Math.random() * 4)];
+                    treasure.style.position = 'fixed';
+                    treasure.style.left = Math.random() * 100 + 'vw';
+                    treasure.style.top = '-50px';
+                    treasure.style.fontSize = '2rem';
+                    treasure.style.pointerEvents = 'none';
+                    treasure.style.zIndex = '9998';
+                    treasure.style.animation = 'treasure-fall 3s linear forwards';
+                    
+                    document.body.appendChild(treasure);
+                    
+                    setTimeout(() => {
+                        if (treasure.parentNode) {
+                            treasure.parentNode.removeChild(treasure);
+                        }
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        // Add treasure fall animation
+        const treasureFallStyle = document.createElement('style');
+        treasureFallStyle.textContent = `
+            @keyframes treasure-fall {
+                0% {
+                    transform: translateY(-50px) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(treasureFallStyle);
+
+        // LEGENDARY CONSOLE MESSAGE
+        console.log(`
+        🏴‍☠️ ========================= 🏴‍☠️
+              WELCOME TO LIGAZONE
+           The Legendary Pirate Arena!
+        🏴‍☠️ ========================= 🏴‍☠️
+        
+        ⚓ Ahoy, ${window.location.hostname} Matey! ⚓
+        
+        🗓️ Current Date: ${new Date().toLocaleDateString()}
+        ⏰ Current Time: ${new Date().toLocaleTimeString()}
+        👤 Welcome aboard, daffa-aditya-p!
+        
+        🎮 SECRET PIRATE COMMANDS:
+        • Press 'P' for Pirate Vision
+        • Press 'T' for Treasure Rain
+        • Click the sound waves to enable ocean sounds
+        
+        ⚔️ Ready to embark on a legendary adventure? ⚔️
+        
+        Fair winds and following seas! 🌊
+        `);
+
+        // PERFORMANCE OPTIMIZATION
+        // Throttle scroll events
+        let ticking = false;
+        function updateOnScroll() {
+            // Scroll-based animations here
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateOnScroll);
+                ticking = true;
+            }
+        });
+
+        // ACCESSIBILITY IMPROVEMENTS
+        // Reduce motion for users who prefer it
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.setProperty('--animation-duration', '0.01s');
+            // Disable heavy animations
+            document.querySelectorAll('.floating-treasure, .skull-particle').forEach(el => {
+                el.style.animation = 'none';
+            });
+        }
+
+        // EPIC FINALE - CONFETTI ON PAGE LOAD COMPLETE
+        setTimeout(() => {
+            if (Math.random() < 0.5) { // 50% chance for extra flair
+                createTreasureRain();
+            }
+        }, 5000);
+
+        // ERROR HANDLING WITH PIRATE FLAIR
+        window.addEventListener('error', function(e) {
+            console.log('🏴‍☠️ Avast! A sea monster has interfered with our code! 🏴‍☠️');
+        });
+
+        // LEGENDARY EASTER EGG - Konami Code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                // LEGENDARY EASTER EGG ACTIVATED!
+                document.body.style.transform = 'rotate(360deg)';
+                document.body.style.transition = 'transform 2s ease-in-out';
+                
+                setTimeout(() => {
+                    document.body.style.transform = '';
+                    alert('🏴‍☠️ LEGENDARY PIRATE MODE ACTIVATED! 🏴‍☠️\nYou have discovered the secret treasure!');
+                    createTreasureRain();
+                }, 2000);
+                
+                konamiCode = [];
+            }
+        });
+    </script>
+
+    <!-- HIDDEN AUDIO ELEMENTS FOR IMMERSIVE EXPERIENCE -->
+    <audio id="oceanWaves" loop style="display: none;">
+        <!-- Fallback for ocean sounds -->
+    </audio>
+
+</body>
+</html>

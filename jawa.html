@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ligazone - Petualangan Menuju Kemenangan</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a4b84;
+            --secondary-color: #2c5f8c;
+            --accent-color: #d4af37;
+            --gold-color: #ffd700;
+            --dark-blue: #0f1419;
+            --light-blue: #87ceeb;
+            --sea-foam: #20b2aa;
+            --pearl-white: #f8f9fa;
+            --shadow-color: rgba(26, 75, 132, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a4b84 50%, #2c5f8c 100%);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .ocean-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(32, 178, 170, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(135, 206, 235, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0f1419 0%, #1a4b84 50%, #2c5f8c 100%);
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff' fill-opacity='0.1'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave 15s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-25px); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.6);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(15, 20, 25, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--gold-color) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--gold-color), #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--light-blue);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .pirate-ship {
+            position: absolute;
+            right: 10%;
+            top: 20%;
+            font-size: 8rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+            animation: ship-sway 8s ease-in-out infinite;
+        }
+
+        @keyframes ship-sway {
+            0%, 100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-20px); }
+        }
+
+        /* Buttons */
+        .btn-pirate {
+            background: linear-gradient(45deg, var(--accent-color), var(--gold-color));
+            border: none;
+            color: var(--dark-blue);
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-pirate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+            color: var(--dark-blue);
+        }
+
+        .btn-pirate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-pirate:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Competition Cards */
+        .competition-section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--gold-color), white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .competition-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .competition-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .competition-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .competition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--gold-color);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gold-color);
+        }
+
+        .card-coordinator {
+            color: var(--light-blue);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card-buttons .btn-pirate,
+        .card-buttons .btn-secondary {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--gold-color);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-name {
+            font-weight: 600;
+            color: var(--gold-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-role {
+            color: var(--light-blue);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-phone {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 20, 25, 0.9);
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-color);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--light-blue);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--gold-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .pirate-ship {
+                right: 5%;
+                font-size: 4rem;
+            }
+            
+            .card-buttons {
+                flex-direction: column;
+            }
+            
+            .card-buttons .btn-pirate,
+            .card-buttons .btn-secondary {
+                flex: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .competition-card,
+            .contact-card {
+                margin: 0.5rem 0;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .treasure-chest {
+            font-size: 4rem;
+            color: var(--gold-color);
+            animation: treasure-bounce 1s infinite;
+        }
+
+        @keyframes treasure-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-color);
+            color: var(--dark-blue);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+            color: var(--dark-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="treasure-chest">
+            <i class="fas fa-treasure-chest"></i>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="ocean-bg">
+        <div class="wave"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <img src="aset/logo.png" alt="Ligazone Logo">
+                LIGAZONE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#competitions">Lomba</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-pirate ms-2" href="#drive-perizinan">Drive Perizinan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                        <h1 class="hero-title">LIGAZONE</h1>
+                        <p class="hero-subtitle">Petualangan Menuju Kemenangan Dimulai di Sini</p>
+                        <div class="mt-4">
+                            <a href="#competitions" class="btn-pirate me-3">
+                                <i class="fas fa-anchor me-2"></i>Jelajahi Lomba
+                            </a>
+                            <a href="#drive-perizinan" class="btn-secondary">
+                                <i class="fas fa-scroll me-2"></i>Drive Perizinan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pirate-ship" data-aos="fade-left" data-aos-delay="500">
+            <i class="fas fa-ship"></i>
+        </div>
+    </section>
+
+    <!-- Competitions Section -->
+    <section id="competitions" class="competition-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Perlombaan Legendaris</h2>
+            <div class="row">
+                <!-- Band Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="competition-card">
+                        <i class="fas fa-music card-icon"></i>
+                        <h3 class="card-title">Band</h3>
+                        <p class="card-coordinator">
+                            <i class="fas fa-user-tie me-2"></i>Koordinator: Moses<br>
+                            <i class="fas fa-phone me-2"></i>+62 877-4306-3367
+                        </p>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-pirate">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solo Vocal Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="competition-card">
+                        <i class="fas fa-microphone card-icon"></i>
+                        <h3 class="card-title">Solo Vokal</h3>
+                        <p class="card-coordinator">
+                            <i class="fas fa-user-tie me-2"></i>Koordinator: Raffa<br>
+                            <i class="fas fa-phone me-2"></i>+62 813-8871-3581
+                        </p>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-pirate">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traditional Dance Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="competition-card">
+                        <i class="fas fa-magic card-icon"></i>
+                        <h3 class="card-title">Tari Tradisional</h3>
+                        <p class="card-coordinator">
+                            <i class="fas fa-user-tie me-2"></i>Koordinator: Felicia<br>
+                            <i class="fas fa-phone me-2"></i>+62 877-1670-5972
+                        </p>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-pirate">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basketball Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="competition-card">
+                        <i class="fas fa-basketball-ball card-icon"></i>
+                        <h3 class="card-title">Basket</h3>
+                        <p class="card-coordinator">
+                            <i class="fas fa-user-tie me-2"></i>Koordinator: Jesslyne<br>
+                            <i class="fas fa-phone me-2"></i>+62 813-9956-3828
+                        </p>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-pirate">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Futsal Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="competition-card">
+                        <i class="fas fa-futbol card-icon"></i>
+                        <h3 class="card-title">Futsal</h3>
+                        <p class="card-coordinator">
+                            <i class="fas fa-user-tie me-2"></i>Koordinator: Awan<br>
+                            <i class="fas fa-phone me-2"></i>+62 813-9991-0110
+                        </p>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-pirate">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-Sport Competition -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="competition-card">
+                        <i class="fas fa-gamepad card-icon"></i>
+                        <h3 class="card-title">E-Sport</h3>
+                        <p class="card-coordinator">
+                            <i class="fas fa-user-tie me-2"></i>Koordinator: Ichsan<br>
+                            <i class="fas fa-phone me-2"></i>+62 856-9753-9273
+                        </p>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-pirate">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Hubungi Koordinator</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-card">
+                        <i class="fas fa-music contact-icon"></i>
+                        <div class="contact-name">Moses</div>
+                        <div class="contact-role">Koordinator Band</div>
+                        <div class="contact-phone">+62 877-4306-3367</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-card">
+                        <i class="fas fa-microphone contact-icon"></i>
+                        <div class="contact-name">Raffa</div>
+                        <div class="contact-role">Koordinator Solo Vokal</div>
+                        <div class="contact-phone">+62 813-8871-3581</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-card">
+                        <i class="fas fa-magic contact-icon"></i>
+                        <div class="contact-name">Felicia</div>
+                        <div class="contact-role">Koordinator Tari Tradisional</div>
+                        <div class="contact-phone">+62 877-1670-5972</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="contact-card">
+                        <i class="fas fa-basketball-ball contact-icon"></i>
+                        <div class="contact-name">Jesslyne</div>
+                        <div class="contact-role">Koordinator Basket</div>
+                        <div class="contact-phone">+62 813-9956-3828</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="contact-card">
+                        <i class="fas fa-futbol contact-icon"></i>
+                        <div class="contact-name">Awan</div>
+                        <div class="contact-role">Koordinator Futsal</div>
+                        <div class="contact-phone">+62 813-9991-0110</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="contact-card">
+                        <i class="fas fa-gamepad contact-icon"></i>
+                        <div class="contact-name">Ichsan</div>
+                        <div class="contact-role">Koordinator E-Sport</div>
+                        <div class="contact-phone">+62 856-9753-9273</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo" data-aos="fade-up">LIGAZONE</div>
+                <p data-aos="fade-up" data-aos-delay="100">Petualangan Menuju Kemenangan</p>
+                <div class="social-links" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <p data-aos="fade-up" data-aos-delay="300">&copy; 2024 Ligazone. Semua hak dilindungi undang-undang.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <a href="#home" class="scroll-top" id="scrollTop">
+        <i class="fas fa-anchor"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const scrollTop = document.getElementById('scrollTop');
+            
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(15, 20, 25, 0.98)';
+                navbar.style.borderBottom = '2px solid rgba(212, 175, 55, 0.5)';
+            } else {
+                navbar.style.background = 'rgba(15, 20, 25, 0.95)';
+                navbar.style.borderBottom = '1px solid rgba(212, 175, 55, 0.3)';
+            }
+
+            // Show/hide scroll to top button
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particleContainer = document.createElement('div');
+            particleContainer.style.position = 'fixed';
+            particleContainer.style.top = '0';
+            particleContainer.style.left = '0';
+            particleContainer.style.width = '100%';
+            particleContainer.style.height = '100%';
+            particleContainer.style.pointerEvents = 'none';
+            particleContainer.style.zIndex = '-1';
+            document.body.appendChild(particleContainer);
+
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Interactive card effects
+        document.querySelectorAll('.competition-card, .contact-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Button click effects
+        document.querySelectorAll('.btn-pirate, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.pirate-ship');
+            if (parallax) {
+                const speed = scrolled * 0.5;
+                parallax.style.transform = `translateY(${speed}px) rotate(${scrolled * 0.1}deg)`;
+            }
+        });
+
+        // Dynamic wave animation
+        function animateWaves() {
+            const waves = document.querySelectorAll('.wave');
+            waves.forEach((wave, index) => {
+                wave.style.animationDelay = `${index * 0.5}s`;
+            });
+        }
+
+        animateWaves();
+
+        // Console easter egg
+        console.log(`
+        🏴‍☠️ Ahoy, matey! Welcome to Ligazone! 🏴‍☠️
+        
+        Ready to embark on an adventure to victory?
+        Join our legendary competitions and become a champion!
+        
+        ⚓ Fair winds and following seas! ⚓
+        `);
+
+        // Add some interactivity to the logo
+        document.querySelector('.navbar-brand img').addEventListener('mouseenter', function() {
+            this.style.transform = 'rotate(360deg) scale(1.1)';
+            this.style.transition = 'transform 0.8s ease';
+        });
+
+        document.querySelector('.navbar-brand img').addEventListener('mouseleave', function() {
+            this.style.transform = 'rotate(0deg) scale(1)';
+        });
+    </script>
+</body>
+</html>

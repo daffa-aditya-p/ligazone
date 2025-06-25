@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ligazone | Pirate Adventure</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --deep-blue: #0a192f;
+            --mid-blue: #172a45;
+            --light-blue: #3a7bd5;
+            --ocean-gradient: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            --gold: #ffd700;
+            --amber: #ffbf00;
+            --wood: #8b4513;
+            --light-wood: #cd853f;
+            --paper: #fffaed;
+            --dark-text: #0a192f;
+            --light-text: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--deep-blue);
+            color: var(--light-text);
+            overflow-x: hidden;
+            background-image: url('https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            position: relative;
+        }
+        
+        body:before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.85);
+            z-index: -1;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+        }
+        
+        .navbar {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navbar-brand {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            color: var(--gold) !important;
+            font-size: 1.8rem;
+            position: relative;
+        }
+        
+        .navbar-brand:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .navbar-logo {
+    height: 30px;
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+@media (max-width: 576px) {
+    .navbar-logo {
+        height: 24px;
+    }
+}
+        .nav-link {
+            color: var(--light-text) !important;
+            font-weight: 600;
+            margin: 0 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold) !important;
+        }
+        
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover:before {
+            width: 100%;
+            left: 0;
+        }
+        
+        .btn-permission {
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            border: none;
+            color: var(--dark-text);
+            font-weight: 700;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-permission:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--amber), var(--gold));
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn-permission:hover:before {
+            left: 0;
+        }
+        
+        .btn-permission:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 0;
+        }
+        
+        .hero-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 1;
+        }
+        
+        .hero-waves svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+        }
+        
+        .hero-waves .shape-fill {
+            fill: rgba(23, 42, 69, 0.8);
+        }
+        
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--light-text);
+            max-width: 700px;
+        }
+        
+        .treasure-divider {
+            display: flex;
+            align-items: center;
+            margin: 4rem 0;
+        }
+        
+        .treasure-divider .line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .treasure-divider .icon {
+            margin: 0 1rem;
+            color: var(--gold);
+            font-size: 2rem;
+        }
+        
+        .competitions {
+            padding: 6rem 0;
+            position: relative;
+            background: rgba(23, 42, 69, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--amber), var(--gold));
+        }
+        
+        .comp-card {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comp-card:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            z-index: 0;
+        }
+        
+        .comp-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+        
+        .comp-card-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .comp-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .comp-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+        
+        .comp-coordinator {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: rgba(248, 249, 250, 0.8);
+        }
+        
+        .comp-coordinator i {
+            color: var(--gold);
+            margin-right: 0.5rem;
+        }
+        
+        .btn-comp {
+            background: transparent;
+            color: var(--light-text);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-comp:hover {
+            background: var(--gold);
+            color: var(--dark-text);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .btn-comp.juknis {
+            border-color: var(--light-blue);
+        }
+        
+        .btn-comp.juknis:hover {
+            background: var(--light-blue);
+        }
+        
+        .contacts {
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-map {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: -1;
+            background-image: url('https://images.unsplash.com/photo-1572816703439-d8b34c4dc93f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        
+        .contact-item {
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--mid-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover .contact-icon {
+            transform: rotate(360deg);
+            background: var(--gold);
+            color: var(--dark-text);
+        }
+        
+        .contact-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .contact-info p {
+            color: rgba(248, 249, 250, 0.8);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-info a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            color: var(--amber);
+        }
+        
+        .footer {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-text {
+            color: rgba(248, 249, 250, 0.6);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-link {
+            width: 40px;
+            height: 40px;
+            background: var(--mid-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            color: var(--light-text);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .footer-link:hover {
+            background: var(--gold);
+            color: var(--dark-text);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: rgba(248, 249, 250, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Compass Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--deep-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .compass {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--mid-blue);
+            position: relative;
+            border: 3px solid var(--gold);
+            animation: pulse 2s infinite;
+        }
+        
+        .compass:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        
+        .compass:after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background: var(--gold);
+            transform-origin: bottom center;
+            animation: rotate 2s infinite linear;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            100% {
+                transform: translateX(-50%) rotate(360deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 215, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .comp-card {
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .treasure-divider .icon {
+                font-size: 1.5rem;
+            }
+            
+            .competitions, .contacts {
+                padding: 4rem 0;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .btn-permission {
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .floating-ship {
+            top: 20%;
+            right: 5%;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .floating-compass {
+            bottom: 10%;
+            left: 5%;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+        
+        .floating-anchor {
+            top: 60%;
+            right: 15%;
+            animation: float 18s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+        
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+        
+        /* Scroll Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--amber));
+            width: 0%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="compass"></div>
+    </div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <!-- <div class="floating-element floating-ship">
+        <i class="fas fa-ship fa-4x"></i>
+    </div> -->
+    <div class="floating-element floating-ship">
+    <img src="https://cdn-icons-png.flaticon.com/512/870/870056.png" alt="Pirate Ship" width="64" height="64">
+</div>
+    <div class="floating-element floating-compass">
+        <i class="fas fa-compass fa-3x"></i>
+    </div>
+    <div class="floating-element floating-anchor">
+        <i class="fas fa-anchor fa-3x"></i>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <!-- <a class="navbar-brand" href="#">LIGAZONE</a>  -->
+            <a class="navbar-brand" href="#">
+    <img src="aset/logo.png" alt="Ligazone Logo" class="navbar-logo">
+    LIGAZONE
+</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#competitions">Competitions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacts">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-permission" href="#permissions">
+                            <i class="fas fa-scroll me-2"></i> Drive Perizinan
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="hero-title">LIGAZONE</h1>
+                    <p class="hero-subtitle">Set sail on an epic adventure with the most prestigious pirate-themed event. Compete, conquer, and claim your treasure!</p>
+                    <a href="#competitions" class="btn btn-permission btn-lg">
+                        <i class="fas fa-compass me-2"></i> Explore Competitions
+                    </a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1604076850742-4c7221948b8e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Pirate Ship" class="img-fluid rounded-3 shadow-lg">
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-waves">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Divider -->
+    <div class="container">
+        <div class="treasure-divider">
+            <div class="line"></div>
+            <div class="icon"><i class="fas fa-treasure-chest"></i></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    
+    <!-- Competitions Section -->
+    <section class="competitions" id="competitions">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">OUR COMPETITIONS</h2>
+            
+            <div class="row">
+                <!-- Band Competition -->
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="comp-card">
+                        <div class="comp-card-content">
+                            <div class="comp-icon">
+                                <i class="fas fa-guitar"></i>
+                            </div>
+                            <h3 class="comp-title">Band</h3>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-user-captain"></i> Coordinator: Moses
+                            </p>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-phone"></i> +62 877-4306-3367
+                            </p>
+                            <div class="mt-4">
+                                <a href="#daftar" class="btn btn-comp">
+                                    <i class="fas fa-scroll me-2"></i> Pendaftaran
+                                </a>
+                                <a href="#juknis" class="btn btn-comp juknis">
+                                    <i class="fas fa-book me-2"></i> Juknis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solo Vokal Competition -->
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="comp-card">
+                        <div class="comp-card-content">
+                            <div class="comp-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <h3 class="comp-title">Solo Vokal</h3>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-user-captain"></i> Coordinator: Raffa
+                            </p>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-phone"></i> +62 813-8871-3581
+                            </p>
+                            <div class="mt-4">
+                                <a href="#daftar" class="btn btn-comp">
+                                    <i class="fas fa-scroll me-2"></i> Pendaftaran
+                                </a>
+                                <a href="#juknis" class="btn btn-comp juknis">
+                                    <i class="fas fa-book me-2"></i> Juknis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tari Tradisional Competition -->
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="comp-card">
+                        <div class="comp-card-content">
+                            <div class="comp-icon">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <h3 class="comp-title">Tari Tradisional</h3>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-user-captain"></i> Coordinator: Felicia
+                            </p>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-phone"></i> +62 877-1670-5972
+                            </p>
+                            <div class="mt-4">
+                                <a href="#daftar" class="btn btn-comp">
+                                    <i class="fas fa-scroll me-2"></i> Pendaftaran
+                                </a>
+                                <a href="#juknis" class="btn btn-comp juknis">
+                                    <i class="fas fa-book me-2"></i> Juknis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Basket Competition -->
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="comp-card">
+                        <div class="comp-card-content">
+                            <div class="comp-icon">
+                                <i class="fas fa-basketball-ball"></i>
+                            </div>
+                            <h3 class="comp-title">Basket</h3>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-user-captain"></i> Coordinator: Jesslyne
+                            </p>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-phone"></i> +62 813-9956-3828
+                            </p>
+                            <div class="mt-4">
+                                <a href="#daftar" class="btn btn-comp">
+                                    <i class="fas fa-scroll me-2"></i> Pendaftaran
+                                </a>
+                                <a href="#juknis" class="btn btn-comp juknis">
+                                    <i class="fas fa-book me-2"></i> Juknis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Futsal Competition -->
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="comp-card">
+                        <div class="comp-card-content">
+                            <div class="comp-icon">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <h3 class="comp-title">Futsal</h3>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-user-captain"></i> Coordinator: Awan
+                            </p>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-phone"></i> +62 813-9991-0110
+                            </p>
+                            <div class="mt-4">
+                                <a href="#daftar" class="btn btn-comp">
+                                    <i class="fas fa-scroll me-2"></i> Pendaftaran
+                                </a>
+                                <a href="#juknis" class="btn btn-comp juknis">
+                                    <i class="fas fa-book me-2"></i> Juknis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- E-Sport Competition -->
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="comp-card">
+                        <div class="comp-card-content">
+                            <div class="comp-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3 class="comp-title">E-Sport</h3>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-user-captain"></i> Coordinator: Ichsan
+                            </p>
+                            <p class="comp-coordinator">
+                                <i class="fas fa-phone"></i> +62 856-9753-9273
+                            </p>
+                            <div class="mt-4">
+                                <a href="#daftar" class="btn btn-comp">
+                                    <i class="fas fa-scroll me-2"></i> Pendaftaran
+                                </a>
+                                <a href="#juknis" class="btn btn-comp juknis">
+                                    <i class="fas fa-book me-2"></i> Juknis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Divider -->
+    <div class="container">
+        <div class="treasure-divider">
+            <div class="line"></div>
+            <div class="icon"><i class="fas fa-anchor"></i></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    
+    <!-- Contacts Section -->
+    <section class="contacts" id="contacts">
+        <div class="contact-map"></div>
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">CONTACT THE CREW</h2>
+            
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <ul class="contact-list">
+                        <li class="contact-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="contact-icon">
+                                <i class="fas fa-guitar"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Moses</h4>
+                                <p>Band Competition Coordinator</p>
+                                <a href="tel:+6287743063367">+62 877-4306-3367</a>
+                            </div>
+                        </li>
+                        
+                        <li class="contact-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="contact-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Raffa</h4>
+                                <p>Solo Vokal Competition Coordinator</p>
+                                <a href="tel:+6281388713581">+62 813-8871-3581</a>
+                            </div>
+                        </li>
+                        
+                        <li class="contact-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="contact-icon">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Felicia</h4>
+                                <p>Tari Tradisional Competition Coordinator</p>
+                                <a href="tel:+6287716705972">+62 877-1670-5972</a>
+                            </div>
+                        </li>
+                        
+                        <li class="contact-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="contact-icon">
+                                <i class="fas fa-basketball-ball"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Jesslyne</h4>
+                                <p>Basket Competition Coordinator</p>
+                                <a href="tel:+6281399563828">+62 813-9956-3828</a>
+                            </div>
+                        </li>
+                        
+                        <li class="contact-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="contact-icon">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Awan</h4>
+                                <p>Futsal Competition Coordinator</p>
+                                <a href="tel:+6281399910110">+62 813-9991-0110</a>
+                            </div>
+                        </li>
+                        
+                        <li class="contact-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="contact-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Ichsan</h4>
+                                <p>E-Sport Competition Coordinator</p>
+                                <a href="tel:+6285697539273">+62 856-9753-9273</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">LIGAZONE</div>
+            <p class="footer-text">Set sail on an epic adventure with the most prestigious pirate-themed event. Compete, conquer, and claim your treasure!</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="footer-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="footer-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="footer-link"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Ligazone. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+            
+            // Hide loader after page load
+            setTimeout(function() {
+                document.querySelector('.loader').classList.add('fade-out');
+            }, 1500);
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        const navbarCollapse = document.querySelector('.navbar-collapse');
+                        if (navbarCollapse.classList.contains('show')) {
+                            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                            bsCollapse.hide();
+                        }
+                    }
+                });
+            });
+            
+            // Scroll Progress Bar
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                document.getElementById("progressBar").style.width = scrolled + "%";
+            };
+            
+            // Create sparkles
+            function createSparkle() {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                // Random position
+                const xPos = Math.random() * window.innerWidth;
+                const yPos = Math.random() * window.innerHeight;
+                sparkle.style.left = xPos + 'px';
+                sparkle.style.top = yPos + 'px';
+                
+                // Random size
+                const size = Math.random() * 5 + 2;
+                sparkle.style.width = size + 'px';
+                sparkle.style.height = size + 'px';
+                
+                // Random animation duration
+                const duration = Math.random() * 2 + 1;
+                sparkle.style.animation = `sparkle ${duration}s infinite`;
+                
+                document.body.appendChild(sparkle);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    document.body.removeChild(sparkle);
+                }, duration * 1000);
+            }
+            
+            // Create sparkles periodically
+            setInterval(createSparkle, 300);
+            
+            // Add hover effect on competition cards
+            const compCards = document.querySelectorAll('.comp-card');
+            compCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            const sparkle = document.createElement('div');
+                            sparkle.className = 'sparkle';
+                            
+                            const rect = this.getBoundingClientRect();
+                            const xPos = rect.left + Math.random() * rect.width;
+                            const yPos = rect.top + Math.random() * rect.height;
+                            
+                            sparkle.style.left = xPos + 'px';
+                            sparkle.style.top = yPos + 'px';
+                            
+                            const size = Math.random() * 5 + 2;
+                            sparkle.style.width = size + 'px';
+                            sparkle.style.height = size + 'px';
+                            
+                            const duration = Math.random() * 2 + 1;
+                            sparkle.style.animation = `sparkle ${duration}s`;
+                            
+                            document.body.appendChild(sparkle);
+                            
+                            setTimeout(() => {
+                                document.body.removeChild(sparkle);
+                            }, duration * 1000);
+                        }, i * 100);
+                    }
+                });
+            });
+        });
+        
+        // Preload fontawesome icons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fix missing icons by adding them manually
+            if (typeof FontAwesome === 'undefined') {
+                // Add ship icon
+                const shipIcon = document.createElement('i');
+                shipIcon.className = 'fas fa-ship';
+                shipIcon.style.display = 'none';
+                document.body.appendChild(shipIcon);
+                
+                // Add treasure chest icon
+                const chestIcon = document.createElement('i');
+                chestIcon.className = 'fas fa-treasure-chest';
+                chestIcon.style.display = 'none';
+                document.body.appendChild(chestIcon);
+                
+                // Replace missing treasure chest icon with anchor as fallback
+                document.querySelectorAll('.fa-treasure-chest').forEach(icon => {
+                    icon.classList.remove('fa-treasure-chest');
+                    icon.classList.add('fa-anchor');
+                });
+                
+                // Replace missing user-captain with user as fallback
+                document.querySelectorAll('.fa-user-captain').forEach(icon => {
+                    icon.classList.remove('fa-user-captain');
+                    icon.classList.add('fa-user');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

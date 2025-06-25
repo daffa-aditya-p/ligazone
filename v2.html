@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIGAZONE - The Ultimate Pirate Championship Arena</title>
+    
+    <!-- Meta Tags for Performance -->
+    <meta name="description" content="LIGAZONE - Join the legendary pirate championship with Band, Solo Vocal, Traditional Dance, Basketball, Futsal, and E-Sport competitions">
+    <meta name="keywords" content="ligazone, pirate, competition, championship, band, vocal, dance, basketball, futsal, esport">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+    
+    <!-- Optimized Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Pirata+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --deep-ocean: #0a1628;
+            --dark-waters: #1a2f4a;
+            --stormy-seas: #2c4c6d;
+            --pirate-gold: #d4af37;
+            --treasure-gold: #ffd700;
+            --blood-crimson: #8b0000;
+            --cannon-smoke: #2f2f2f;
+            --bone-white: #f8f9fa;
+            --ship-wood: #8b4513;
+            --ocean-mist: #87ceeb;
+            --emerald-depths: #50c878;
+            --sapphire-blue: #0f52ba;
+            --rum-amber: #d2691e;
+            --steel-grey: #708090;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-ocean);
+            color: var(--bone-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Optimized Ocean Background */
+        .ocean-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background: 
+                radial-gradient(ellipse at 30% 40%, rgba(139, 0, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--deep-ocean) 0%, var(--dark-waters) 40%, var(--stormy-seas) 100%);
+            will-change: transform;
+        }
+
+        /* Lightweight Wave Animation */
+        .wave-effect {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: -5;
+            opacity: 0.3;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C150,100 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z' fill='%23ffd700'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: gentle-wave 20s linear infinite;
+        }
+
+        @keyframes gentle-wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1200px); }
+        }
+
+        /* Optimized Particle System */
+        .treasure-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--treasure-gold);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: particle-float 8s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        @keyframes particle-float {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-30px) translateX(20px);
+                opacity: 1;
+            }
+        }
+
+        /* Lightning Effect - Optimized */
+        .lightning-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: -8;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease;
+        }
+
+        /* Loading Screen - Optimized */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--deep-ocean), var(--dark-waters));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease;
+        }
+
+        .loading-treasure {
+            width: 80px;
+            height: 80px;
+            border: 4px solid var(--pirate-gold);
+            border-radius: 50%;
+            border-top: 4px solid transparent;
+            animation: spin 1s linear infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-family: 'Pirata One', cursive;
+            font-size: 2rem;
+            color: var(--treasure-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Optimized Navigation */
+        .pirate-navbar {
+            background: rgba(26, 47, 74, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--pirate-gold);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            will-change: background;
+        }
+
+        .brand-logo {
+            font-family: 'Pirata One', cursive;
+            font-size: 2rem;
+            color: var(--treasure-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            color: var(--pirate-gold);
+        }
+
+        .brand-logo img {
+            height: 40px;
+            width: auto;
+            border-radius: 50%;
+            border: 2px solid var(--pirate-gold);
+        }
+
+        .nav-link-pirate {
+            color: var(--bone-white);
+            font-weight: 500;
+            font-size: 1rem;
+            margin: 0 0.8rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link-pirate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--pirate-gold), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .nav-link-pirate:hover::before {
+            left: 100%;
+        }
+
+        .nav-link-pirate:hover {
+            color: var(--deep-ocean);
+            background: var(--treasure-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section - Optimized */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 30% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Pirata One', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, 
+                var(--treasure-gold) 0%, 
+                var(--bone-white) 30%, 
+                var(--pirate-gold) 70%, 
+                var(--treasure-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--ocean-mist);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pirate-ship {
+            position: absolute;
+            right: 5%;
+            top: 20%;
+            font-size: clamp(4rem, 10vw, 8rem);
+            color: var(--ship-wood);
+            z-index: 1;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 20px rgba(139, 69, 19, 0.5));
+            animation: ship-sway 8s ease-in-out infinite;
+        }
+
+        @keyframes ship-sway {
+            0%, 100% { transform: rotate(-3deg) translateY(0px); }
+            50% { transform: rotate(3deg) translateY(-15px); }
+        }
+
+        /* Optimized Buttons */
+        .btn-treasure {
+            background: linear-gradient(45deg, var(--treasure-gold), var(--pirate-gold));
+            border: 2px solid var(--ship-wood);
+            color: var(--deep-ocean);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-treasure:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+            color: var(--deep-ocean);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--treasure-gold);
+            color: var(--treasure-gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--treasure-gold);
+            color: var(--deep-ocean);
+            transform: translateY(-3px);
+        }
+
+        /* Competition Section - Optimized */
+        .competition-section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Pirata One', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--treasure-gold), var(--bone-white), var(--pirate-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .competition-card {
+            background: rgba(26, 47, 74, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--pirate-gold);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .competition-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .competition-card:hover::before {
+            left: 100%;
+        }
+
+        .competition-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: var(--treasure-gold);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--treasure-gold);
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--treasure-gold);
+            text-align: center;
+        }
+
+        .card-coordinator {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--pirate-gold);
+        }
+
+        .coordinator-name {
+            font-weight: 600;
+            color: var(--ocean-mist);
+            margin-bottom: 0.5rem;
+        }
+
+        .coordinator-phone {
+            font-family: 'Courier New', monospace;
+            color: var(--bone-white);
+            font-size: 0.9rem;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-card {
+            background: linear-gradient(45deg, var(--blood-crimson), var(--rum-amber));
+            border: 2px solid var(--pirate-gold);
+            color: var(--bone-white);
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .btn-card:hover {
+            background: linear-gradient(45deg, var(--treasure-gold), var(--pirate-gold));
+            color: var(--deep-ocean);
+            transform: translateY(-2px);
+        }
+
+        .btn-card.secondary {
+            background: linear-gradient(45deg, var(--emerald-depths), var(--sapphire-blue));
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(139, 0, 0, 0.1) 50%, transparent 100%);
+        }
+
+        .contact-card {
+            background: rgba(44, 76, 109, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--pirate-gold);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--treasure-gold);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--treasure-gold);
+            margin-bottom: 1rem;
+        }
+
+        .contact-name {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: var(--treasure-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-role {
+            color: var(--ocean-mist);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .contact-phone {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid var(--pirate-gold);
+            display: inline-block;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(45deg, var(--deep-ocean), var(--dark-waters), var(--cannon-smoke));
+            padding: 3rem 0 2rem;
+            border-top: 2px solid var(--pirate-gold);
+        }
+
+        .footer-logo {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: var(--treasure-gold);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--ocean-mist);
+            font-size: 1.8rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--treasure-gold);
+            transform: translateY(-3px);
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(45deg, var(--treasure-gold), var(--pirate-gold));
+            color: var(--deep-ocean);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            border: 2px solid var(--ship-wood);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: var(--deep-ocean);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .pirate-ship {
+                right: 2%;
+                font-size: 5rem;
+            }
+            
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brand-logo {
+                font-size: 1.8rem;
+            }
+            
+            .brand-logo img {
+                height: 35px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .pirate-ship {
+                font-size: 4rem;
+                top: 25%;
+            }
+            
+            .card-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-card {
+                flex: none;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .competition-card,
+            .contact-card {
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
+            
+            .btn-treasure,
+            .btn-secondary {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Performance Optimizations */
+        .will-change-transform {
+            will-change: transform;
+        }
+
+        .gpu-acceleration {
+            transform: translateZ(0);
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--deep-ocean);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--treasure-gold), var(--pirate-gold));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--pirate-gold), var(--treasure-gold));
+        }
+
+        /* Intersection Observer Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sound Visualizer */
+        .sound-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--pirate-gold);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: var(--deep-ocean);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .sound-toggle:hover {
+            transform: scale(1.1);
+            background: var(--treasure-gold);
+        }
+
+        /* Optimized Particles Container */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -6;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-treasure"></div>
+        <div class="loading-text">Setting Sail to Adventure...</div>
+    </div>
+
+    <!-- Ocean Background -->
+    <div class="ocean-backdrop"></div>
+    <div class="wave-effect"></div>
+    <div class="lightning-flash" id="lightningFlash"></div>
+
+    <!-- Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Sound Toggle -->
+    <button class="sound-toggle" id="soundToggle" title="Toggle Ocean Sounds">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pirate-navbar">
+        <div class="container">
+            <a class="navbar-brand brand-logo" href="#home">
+                <img src="aset/logo.png" alt="Ligazone Logo">
+                LIGAZONE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-pirate" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-pirate" href="#competitions">Kompetisi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-pirate" href="#contact">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-pirate btn-treasure ms-2" href="#drive-perizinan">Drive Perizinan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center fade-in">
+                        <h1 class="hero-title">LIGAZONE</h1>
+                        <p class="hero-subtitle">
+                            Berlayar Menuju Kemenangan dalam Turnamen Bajak Laut Legendaris
+                        </p>
+                        <div class="mt-4">
+                            <a href="#competitions" class="btn-treasure">
+                                <i class="fas fa-anchor me-2"></i>Jelajahi Kompetisi
+                            </a>
+                            <a href="#drive-perizinan" class="btn-secondary">
+                                <i class="fas fa-scroll me-2"></i>Drive Perizinan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pirate-ship">
+            <i class="fas fa-ship"></i>
+        </div>
+    </section>
+
+    <!-- Competitions Section -->
+    <section id="competitions" class="competition-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Arena Kompetisi Legendaris</h2>
+            <div class="row">
+                <!-- Band Competition -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="competition-card fade-in">
+                        <i class="fas fa-music card-icon"></i>
+                        <h3 class="card-title">Band Legendary</h3>
+                        <div class="card-coordinator">
+                            <div class="coordinator-name">Koordinator: Moses</div>
+                            <div class="coordinator-phone">+62 877-4306-3367</div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-card">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-card secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solo Vocal Competition -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="competition-card fade-in">
+                        <i class="fas fa-microphone card-icon"></i>
+                        <h3 class="card-title">Solo Vokal</h3>
+                        <div class="card-coordinator">
+                            <div class="coordinator-name">Koordinator: Raffa</div>
+                            <div class="coordinator-phone">+62 813-8871-3581</div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-card">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-card secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traditional Dance Competition -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="competition-card fade-in">
+                        <i class="fas fa-magic card-icon"></i>
+                        <h3 class="card-title">Tari Tradisional</h3>
+                        <div class="card-coordinator">
+                            <div class="coordinator-name">Koordinator: Felicia</div>
+                            <div class="coordinator-phone">+62 877-1670-5972</div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-card">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-card secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basketball Competition -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="competition-card fade-in">
+                        <i class="fas fa-basketball-ball card-icon"></i>
+                        <h3 class="card-title">Basketball</h3>
+                        <div class="card-coordinator">
+                            <div class="coordinator-name">Koordinator: Jesslyne</div>
+                            <div class="coordinator-phone">+62 813-9956-3828</div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-card">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-card secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Futsal Competition -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="competition-card fade-in">
+                        <i class="fas fa-futbol card-icon"></i>
+                        <h3 class="card-title">Futsal</h3>
+                        <div class="card-coordinator">
+                            <div class="coordinator-name">Koordinator: Awan</div>
+                            <div class="coordinator-phone">+62 813-9991-0110</div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-card">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-card secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-Sport Competition -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="competition-card fade-in">
+                        <i class="fas fa-gamepad card-icon"></i>
+                        <h3 class="card-title">E-Sport</h3>
+                        <div class="card-coordinator">
+                            <div class="coordinator-name">Koordinator: Ichsan</div>
+                            <div class="coordinator-phone">+62 856-9753-9273</div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#daftar" class="btn-card">
+                                <i class="fas fa-user-plus me-2"></i>Pendaftaran
+                            </a>
+                            <a href="#juknis" class="btn-card secondary">
+                                <i class="fas fa-book me-2"></i>Juknis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Kru Koordinator</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in">
+                        <i class="fas fa-music contact-icon"></i>
+                        <div class="contact-name">Moses</div>
+                        <div class="contact-role">Koordinator Band</div>
+                        <div class="contact-phone">+62 877-4306-3367</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in">
+                        <i class="fas fa-microphone contact-icon"></i>
+                        <div class="contact-name">Raffa</div>
+                        <div class="contact-role">Koordinator Solo Vokal</div>
+                        <div class="contact-phone">+62 813-8871-3581</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in">
+                        <i class="fas fa-magic contact-icon"></i>
+                        <div class="contact-name">Felicia</div>
+                        <div class="contact-role">Koordinator Tari Tradisional</div>
+                        <div class="contact-phone">+62 877-1670-5972</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in">
+                        <i class="fas fa-basketball-ball contact-icon"></i>
+                        <div class="contact-name">Jesslyne</div>
+                        <div class="contact-role">Koordinator Basketball</div>
+                        <div class="contact-phone">+62 813-9956-3828</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in">
+                        <i class="fas fa-futbol contact-icon"></i>
+                        <div class="contact-name">Awan</div>
+                        <div class="contact-role">Koordinator Futsal</div>
+                        <div class="contact-phone">+62 813-9991-0110</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in">
+                        <i class="fas fa-gamepad contact-icon"></i>
+                        <div class="contact-name">Ichsan</div>
+                        <div class="contact-role">Koordinator E-Sport</div>
+                        <div class="contact-phone">+62 856-9753-9273</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <div class="footer-logo fade-in">LIGAZONE</div>
+                <p class="fade-in">Turnamen Bajak Laut Legendaris</p>
+                <div class="social-links fade-in">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <p class="fade-in">&copy; 2025 Ligazone. Semua hak cipta dilindungi undang-undang bajak laut.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <a href="#home" class="scroll-top" id="scrollTop">
+        <i class="fas fa-anchor"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Performance optimized initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWebsite();
+        });
+
+        function initializeWebsite() {
+            // Initialize AOS with performance settings
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 50,
+                disable: window.innerWidth < 768 // Disable on mobile for performance
+            });
+
+            // Handle loading screen
+            handleLoadingScreen();
+            
+            // Initialize optimized effects
+            initializeOptimizedEffects();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Initialize intersection observer for fade-in animations
+            initializeIntersectionObserver();
+        }
+
+        function handleLoadingScreen() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            
+            // Show loading for 2 seconds
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    startPostLoadEffects();
+                }, 800);
+            }, 2000);
+        }
+
+        function startPostLoadEffects() {
+            // Start lightweight particle system
+            if (window.innerWidth > 768) {
+                createOptimizedParticles();
+            }
+            
+            // Occasional lightning effect
+            startLightningEffect();
+        }
+
+        function createOptimizedParticles() {
+            const container = document.getElementById('particlesContainer');
+            const maxParticles = Math.min(20, Math.floor(window.innerWidth / 100));
+            
+            function createParticle() {
+                if (container.children.length >= maxParticles) return;
+                
+                const particle = document.createElement('div');
+                particle.className = 'treasure-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
+                
+                container.appendChild(particle);
+                
+                // Remove particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 16000);
+            }
+            
+            // Create particles periodically
+            setInterval(createParticle, 3000);
+        }
+
+        function startLightningEffect() {
+            const lightning = document.getElementById('lightningFlash');
+            
+            function triggerLightning() {
+                if (Math.random() < 0.05) { // 5% chance
+                    lightning.style.opacity = '1';
+                    setTimeout(() => {
+                        lightning.style.opacity = '0';
+                    }, 100);
+                }
+            }
+            
+            setInterval(triggerLightning, 5000);
+        }
+
+        function setupEventListeners() {
+            // Optimized scroll handler
+            let ticking = false;
+            
+            function handleScroll() {
+                const navbar = document.querySelector('.pirate-navbar');
+                const scrollTop = document.getElementById('scrollTop');
+                const scrollY = window.pageYOffset;
+                
+                // Navbar effect
+                if (scrollY > 100) {
+                    navbar.style.background = 'rgba(26, 47, 74, 0.98)';
+                    navbar.style.boxShadow = '0 4px 25px rgba(0, 0, 0, 0.4)';
+                } else {
+                    navbar.style.background = 'rgba(26, 47, 74, 0.95)';
+                    navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+                }
+                
+                // Scroll to top button
+                if (scrollY > 300) {
+                    scrollTop.classList.add('visible');
+                } else {
+                    scrollTop.classList.remove('visible');
+                }
+                
+                // Parallax ship effect (desktop only)
+                if (window.innerWidth > 768) {
+                    const ship = document.querySelector('.pirate-ship');
+                    if (ship) {
+                        const speed = scrollY * 0.2;
+                        ship.style.transform = `translateY(${speed}px) rotate(${scrollY * 0.02}deg)`;
+                    }
+                }
+                
+                ticking = false;
+            }
+            
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(handleScroll);
+                    ticking = true;
+                }
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Sound toggle
+            const soundToggle = document.getElementById('soundToggle');
+            let soundEnabled = false;
+            let audioContext, oscillator;
+
+            soundToggle.addEventListener('click', function() {
+                if (!soundEnabled) {
+                    enableSound();
+                    soundToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+                } else {
+                    disableSound();
+                    soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+                soundEnabled = !soundEnabled;
+            });
+
+            function enableSound() {
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = 80;
+                    oscillator.type = 'sine';
+                    gainNode.gain.value = 0.05;
+                    
+                    oscillator.start();
+                } catch (e) {
+                    console.log('Audio not supported');
+                }
+            }
+
+            function disableSound() {
+                if (oscillator) {
+                    oscillator.stop();
+                    oscillator = null;
+                }
+                if (audioContext) {
+                    audioContext.close();
+                    audioContext = null;
+                }
+            }
+        }
+
+        function initializeIntersectionObserver() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        function initializeOptimizedEffects() {
+            // Lightweight button hover effects
+            document.querySelectorAll('.btn-treasure, .btn-secondary, .btn-card').forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Card hover effects
+            document.querySelectorAll('.competition-card, .contact-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        }
+
+        // Performance monitoring
+        function logPerformance() {
+            if (performance.getEntriesByType) {
+                const perfData = performance.getEntriesByType("navigation")[0];
+                console.log(`LIGAZONE Performance Report:
+                Load Time: ${(perfData.loadEventEnd - perfData.fetchStart).toFixed(2)}ms
+                DOM Ready: ${(perfData.domContentLoadedEventEnd - perfData.fetchStart).toFixed(2)}ms
+                Current User: daffa-aditya-p
+                Date: 2025-06-25 08:23:10`);
+            }
+        }
+
+        // Log performance after load
+        window.addEventListener('load', function() {
+            setTimeout(logPerformance, 1000);
+        });
+
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.warn('Ligazone: Non-critical error handled gracefully');
+        });
+
+        // Memory cleanup
+        window.addEventListener('beforeunload', function() {
+            // Clean up any remaining intervals or timeouts
+            document.querySelectorAll('.treasure-particle').forEach(particle => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
