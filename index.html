@@ -135,6 +135,26 @@
         .nav-link:hover::after {
             width: 100%;
         }
+        /* Dropdown Styling */
+.dropdown-menu-dark {
+    backdrop-filter: blur(10px);
+}
+
+.dropdown-item {
+    color: var(--light-blue) !important;
+    transition: all 0.3s ease;
+    padding: 0.75rem 1rem;
+}
+
+.dropdown-item:hover {
+    background: rgba(212, 175, 55, 0.2) !important;
+    color: var(--gold-color) !important;
+    transform: translateX(5px);
+}
+
+.dropdown-item i {
+    color: var(--accent-color);
+}
 
         /* Hero Section */
         .hero-section {
@@ -371,6 +391,56 @@
             color: white;
             font-size: 0.9rem;
         }
+        .whatsapp-btn {
+    background: linear-gradient(45deg, #25d366, #128c7e);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    color: white;
+    background: linear-gradient(45deg, #128c7e, #25d366);
+}
+
+.whatsapp-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.whatsapp-btn:hover::before {
+    left: 100%;
+}
+
+.whatsapp-btn i {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 576px) {
+    .whatsapp-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
 
         /* Footer */
         .footer {
@@ -528,8 +598,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Kontak</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-pirate ms-2" href="#drive-perizinan">Drive Perizinan</a>
+                    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle btn-pirate ms-2" href="#" id="driveDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-scroll me-2"></i>Drive Perizinan
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="driveDropdown" style="background: rgba(15, 20, 25, 0.95); border: 1px solid rgba(212, 175, 55, 0.3);">
+        <li><a class="dropdown-item" href="https://drive.google.com/file/d/12HZISTyoAC0WHofrx5BI_s3jjRDMCsIq/view?usp=sharing">
+            <i class="fas fa-trophy me-2"></i>Surat Perizinan Lomba
+        </a></li>
+        <li><a class="dropdown-item" href="https://drive.google.com/file/d/125oSPNwSbFMC_e-1uDxAD0HXjfLNL73u/view?usp=sharing">
+            <i class="fas fa-music me-2"></i>Surat Perizinan Seleksi Band
+        </a></li>
+    </ul>
+</li>
                     </li>
                 </ul>
             </div>
@@ -543,15 +624,25 @@
                 <div class="col-lg-10">
                     <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                         <h1 class="hero-title">LIGAZONE</h1>
-                        <p class="hero-subtitle">Petualangan Menuju Kemenangan Dimulai di Sini</p>
-                        <div class="mt-4">
-                            <a href="#competitions" class="btn-pirate me-3">
-                                <i class="fas fa-anchor me-2"></i>Jelajahi Lomba
-                            </a>
-                            <a href="#drive-perizinan" class="btn-secondary">
-                                <i class="fas fa-scroll me-2"></i>Drive Perizinan
-                            </a>
-                        </div>
+                        <p class="hero-subtitle">"Sailing Through The Caribbean"</p>
+                        <div class="mt-4 d-flex flex-wrap gap-3 justify-content-center">
+    <a href="#competitions" class="btn-pirate">
+        <i class="fas fa-anchor me-2"></i>Jelajahi Lomba
+    </a>
+    <div class="dropdown">
+        <button class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            <i class="fas fa-scroll me-2"></i>Drive Perizinan
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" style="background: rgba(15, 20, 25, 0.95); border: 1px solid rgba(212, 175, 55, 0.3);">
+            <li><a class="dropdown-item" href="https://drive.google.com/file/d/12HZISTyoAC0WHofrx5BI_s3jjRDMCsIq/view?usp=sharing">
+                <i class="fas fa-trophy me-2"></i>Surat Perizinan Lomba
+            </a></li>
+            <li><a class="dropdown-item" href="https://drive.google.com/file/d/125oSPNwSbFMC_e-1uDxAD0HXjfLNL73u/view?usp=sharing">
+                <i class="fas fa-music me-2"></i>Surat Perizinan Seleksi Band
+            </a></li>
+        </ul>
+    </div>
+</div>
                     </div>
                 </div>
             </div>
@@ -579,7 +670,7 @@
                             <a href="https://forms.gle/5Dq4hLHHhAAcirwN8" class="btn-pirate">
                                 <i class="fas fa-user-plus me-2"></i>Pendaftaran
                             </a>
-                            <a href="https://docs.google.com/document/d/1A3ZwpPYVC-YOItMid3vGpysjbGcpQ_Yvvw69TX_EU9M/edit?usp=drivesdk" class="btn-secondary">
+                            <a href="https://drive.google.com/file/d/1dA1hf4S0Bic-YyDkh8FDnakWZHM_1_bJ/view?usp=sharing" class="btn-secondary">
                                 <i class="fas fa-book me-2"></i>Juknis
                             </a>
                         </div>
@@ -596,10 +687,10 @@
                             <i class="fas fa-phone me-2"></i>+62 813-8871-3581
                         </p>
                         <div class="card-buttons">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1J0scl0tD4jI2aRZ30B9anUqZb74UBfiVYRTAXpvl4xE66A/viewform?usp=header" class="btn-pirate">
+                            <a href="https://forms.gle/WJLkTUZzum9ig7XMA" class="btn-pirate">
                                 <i class="fas fa-user-plus me-2"></i>Pendaftaran
                             </a>
-                            <a href="https://docs.google.com/document/d/1BwD-1L83In4Srum3iclrDVKN3LQ0hu8yVkX1AvZJguI/edit?usp=sharing" class="btn-secondary">
+                            <a href="https://drive.google.com/file/d/15v30y6tNSn5SeMR1b2Bs9XGEN1j4CLHV/view?usp=sharing" class="btn-secondary">
                                 <i class="fas fa-book me-2"></i>Juknis
                             </a>
                         </div>
@@ -616,10 +707,10 @@
                             <i class="fas fa-phone me-2"></i>+62 877-1670-5972
                         </p>
                         <div class="card-buttons">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp51J3XpmiydQO9oXdHZfqn1piTzTHfBa-YD5NIaFK0nWWOQ/viewform?usp=header" class="btn-pirate">
+                            <a href="https://forms.gle/8grMoUawqYDsMef27" class="btn-pirate">
                                 <i class="fas fa-user-plus me-2"></i>Pendaftaran
                             </a>
-                            <a href="https://drive.google.com/file/d/1Ad3ITQYEYl6v0YIpxHBC92gGP-NntSvm/view?usp=drivesdk" class="btn-secondary">
+                            <a href="https://drive.google.com/drive/folders/1KnhD-z9kCT5v8PdiS1I2dRNmnOGDaBpt" class="btn-secondary">
                                 <i class="fas fa-book me-2"></i>Juknis
                             </a>
                         </div>
@@ -659,10 +750,10 @@
                             <i class="fas fa-phone me-2"></i>+62 813-9991-0110
                         </p>
                         <div class="card-buttons">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM3G33nKkomQbzuvP2fCsoPAnKIOH8aqDKIZYhdOS3JOpy1Q/viewform?usp=header" class="btn-pirate">
+                            <a href="https://forms.gle/4Hv6fX5nSvuiSCgh8" class="btn-pirate">
                                 <i class="fas fa-user-plus me-2"></i>Pendaftaran
                             </a>
-                            <a href="https://drive.google.com/file/d/1IPp1F5tG6S1SSCOMtjZ1mDr_68rOZJJB/view?usp=drivesdk" class="btn-secondary">
+                            <a href="https://drive.google.com/file/d/1N2E3OPD5dQZf0y0jIyij_qq9hLbDSw6e/view?usp=drivesdk" class="btn-secondary">
                                 <i class="fas fa-book me-2"></i>Juknis
                             </a>
                         </div>
@@ -679,10 +770,10 @@
                             <i class="fas fa-phone me-2"></i>+62 856-9753-9273
                         </p>
                         <div class="card-buttons">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkiS0WQctBzYgNeHvsFrtRbjB4tJSo2dv7NS9rXXZ2yMpwew/viewform?usp=header" class="btn-pirate">
+                            <a href="https://forms.gle/oFNts8peDo6BAxzz7" class="btn-pirate">
                                 <i class="fas fa-user-plus me-2"></i>Pendaftaran
                             </a>
-                            <a href="https://docs.google.com/document/d/14epnU1aIoqab20LWi5xhY7jhK8RXagUO/edit?usp=drivesdk&ouid=102613051559141093723&rtpof=true&sd=true" class="btn-secondary">
+                            <a href="https://drive.google.com/drive/folders/14h6j_sT3Bg7OZ495mi2IuhnJIUC1weM0" class="btn-secondary">
                                 <i class="fas fa-book me-2"></i>Juknis
                             </a>
                         </div>
@@ -693,75 +784,98 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Hubungi Koordinator</h2>
-            <div class="row">
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="contact-card">
-                        <i class="fas fa-music contact-icon"></i>
-                        <div class="contact-name">Moses</div>
-                        <div class="contact-role">Koordinator Band</div>
-                        <div class="contact-phone">+62 877-4306-3367</div>
-                    </div>
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Hubungi Koordinator</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-card">
+                    <i class="fas fa-music contact-icon"></i>
+                    <div class="contact-name">Moses</div>
+                    <div class="contact-role">Koordinator Band</div>
+                    <div class="contact-phone">+62 877-4306-3367</div>
+                    <a href="https://wa.me/6287743063367" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat WhatsApp
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="contact-card">
-                        <i class="fas fa-microphone contact-icon"></i>
-                        <div class="contact-name">Raffa</div>
-                        <div class="contact-role">Koordinator Solo Vokal</div>
-                        <div class="contact-phone">+62 813-8871-3581</div>
-                    </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-card">
+                    <i class="fas fa-microphone contact-icon"></i>
+                    <div class="contact-name">Raffa</div>
+                    <div class="contact-role">Koordinator Solo Vokal</div>
+                    <div class="contact-phone">+62 813-8871-3581</div>
+                    <a href="https://wa.me/6281388713581" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat WhatsApp
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="contact-card">
-                        <i class="fas fa-magic contact-icon"></i>
-                        <div class="contact-name">Felicia</div>
-                        <div class="contact-role">Koordinator Tari Tradisional</div>
-                        <div class="contact-phone">+62 877-1670-5972</div>
-                    </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="contact-card">
+                    <i class="fas fa-magic contact-icon"></i>
+                    <div class="contact-name">Felicia</div>
+                    <div class="contact-role">Koordinator Tari Tradisional</div>
+                    <div class="contact-phone">+62 877-1670-5972</div>
+                    <a href="https://wa.me/6287716705972" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat WhatsApp
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="contact-card">
-                        <i class="fas fa-basketball-ball contact-icon"></i>
-                        <div class="contact-name">Jesslyne</div>
-                        <div class="contact-role">Koordinator Basket</div>
-                        <div class="contact-phone">+62 813-9956-3828</div>
-                    </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="contact-card">
+                    <i class="fas fa-basketball-ball contact-icon"></i>
+                    <div class="contact-name">Jesslyne</div>
+                    <div class="contact-role">Koordinator Basket</div>
+                    <div class="contact-phone">+62 813-9956-3828</div>
+                    <a href="https://wa.me/6281399563828" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat WhatsApp
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="contact-card">
-                        <i class="fas fa-futbol contact-icon"></i>
-                        <div class="contact-name">Awan</div>
-                        <div class="contact-role">Koordinator Futsal</div>
-                        <div class="contact-phone">+62 813-9991-0110</div>
-                    </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="contact-card">
+                    <i class="fas fa-futbol contact-icon"></i>
+                    <div class="contact-name">Awan</div>
+                    <div class="contact-role">Koordinator Futsal</div>
+                    <div class="contact-phone">+62 813-9991-0110</div>
+                    <a href="https://wa.me/6281399910110" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat WhatsApp
+                    </a>
                 </div>
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                    <div class="contact-card">
-                        <i class="fas fa-gamepad contact-icon"></i>
-                        <div class="contact-name">Ichsan</div>
-                        <div class="contact-role">Koordinator E-Sport</div>
-                        <div class="contact-phone">+62 856-9753-9273</div>
-                    </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                <div class="contact-card">
+                    <i class="fas fa-gamepad contact-icon"></i>
+                    <div class="contact-name">Ichsan</div>
+                    <div class="contact-role">Koordinator E-Sport</div>
+                    <div class="contact-phone">+62 856-9753-9273</div>
+                    <a href="https://wa.me/6285697539273" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat WhatsApp
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo" data-aos="fade-up">LIGAZONE</div>
-                <p data-aos="fade-up" data-aos-delay="100">Petualangan Menuju Kemenangan</p>
+                <p data-aos="fade-up" data-aos-delay="100">" Sailing Through The Caribbean "</p>
                 <div class="social-links" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/ligazone109"><i class="fab fa-instagram"></i></a>
+                   <!--  <a href="#"><i class="fab fa-twitter"></i></a> -->
+                   <!--  <a href="#"><i class="fab fa-youtube"></i></a> -->
+                    <a href="https://www.tiktok.com/@ligazone109"><i class="fab fa-tiktok"></i></a>
                 </div>
-                <p data-aos="fade-up" data-aos-delay="300">&copy; 2024 Ligazone. Semua hak dilindungi undang-undang.</p>
+                <p data-aos="fade-up" data-aos-delay="300">&copy; 2025 Ligazone 3</p>
             </div>
         </div>
     </footer>
@@ -920,6 +1034,16 @@
                 parallax.style.transform = `translateY(${speed}px) rotate(${scrolled * 0.1}deg)`;
             }
         });
+        // WhatsApp button hover effect
+document.querySelectorAll('.whatsapp-btn').forEach(button => {
+    button.addEventListener('mouseenter', function() {
+        this.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim Pesan';
+    });
+    
+    button.addEventListener('mouseleave', function() {
+        this.innerHTML = '<i class="fab fa-whatsapp"></i> Chat WhatsApp';
+    });
+});
 
         // Dynamic wave animation
         function animateWaves() {
